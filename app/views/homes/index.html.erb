@@ -1,0 +1,7 @@
+<h1>Home controller index action...</h1>
+
+<% if enduser_signed_in? %>
+  <%= link_to 'Sign out', destroy_enduser_session_path, data: { turbo_method: :delete }  %>
+<% else %>
+  <%= link_to 'Sign in', new_enduser_session_path %>
+<% end %>
