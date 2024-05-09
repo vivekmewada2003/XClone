@@ -1,3 +1,3 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_enduser!
+  before_action :authenticate_user!
 end

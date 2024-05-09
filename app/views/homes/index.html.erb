@@ -1,7 +1,295 @@
-<h1>Home controller index action...</h1>
+<div class="container-fluid container-md">
+                <!-- xs NAV BAR -->
+    <nav class=" bg-light xs-nav fixed-bottom    d-sm-none">
+        <div class="container-fluid">
+            <div class="row h-50">
+                <div class="col-3">
+                    <span><i class="fa-solid fa-house fs-3 py-3"></i></span>
+                </div>
+                <div class="col-3">
+                <span><i class="fa-solid fa-magnifying-glass fs-2 py-3 "></i></span>
+                </div>
+                <div class="col-3">
+                <span><i class="fa-solid fa-bell fs-2 py-3"></i></span>
+                </div>
+                <div class="col-3 ">
+                    <span><i class="fa-solid fa-envelope fs-2 py-3"></i></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="row ">
+        <!-- LEFT SIDE BAR -->
+        <div
+            class="d-none col-sm-2  d-sm-block  col-md-3 col-lg-3 d-flex flex-column text-sm-end text-md-start  align-items-lg-start left_sidebar border-end ">
+            <div>
+                <%# <span><i class="fa-brands fa-twitter display-5 text-info py-3  "></i></span> %>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-twitter-x mb-3" viewBox="0 0 16 16">
+                    <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                </svg>
+            </div>
+            <div class="d-flex align-items-center justify-content-sm-end justify-content-md-start left-sidebar-hover">
+                <span><i class="fa-solid fa-house fs-5 py-3"></i></span>
+                <p class="d-none d-md-block fs-4 pt-3 ps-2 fw-bold">Home</p>
+            </div>
+            <div class="d-flex align-items-center d-block d-md-none  justify-content-sm-end justify-content-md-start justify-content-sm-end justify-content-md-start">
+                <span><i class="fa-solid fa-magnifying-glass fs-5 py-3 "></i></span>
+                <!-- <p class="d-none d-lg-block fs-3 pt-3 ps-1">Home</p> -->
+            </div>
+            <div class="d-flex align-items-center  justify-content-sm-end justify-content-md-start left-sidebar-hover">
+                <span><i class="fa-solid fa-hashtag fs-5 py-3 d-none d-md-block"></i></span>
+                <p class="d-none d-md-block fs-4 pt-3 ps-2">Expolore</p>
+            </div>
+            <div class="d-flex align-items-center  justify-content-sm-end justify-content-md-start left-sidebar-hover">
+                <span><i class="fa-solid fa-bell fs-5 py-3"></i></span>
+                <p class="d-none d-md-block fs-4 pt-3 ps-2">Notifications</p>
+            </div>
+            <div class="d-flex align-items-center  justify-content-sm-end justify-content-md-start left-sidebar-hover">
+                <span><i class="fa-solid fa-envelope fs-5 py-3"></i></span>
+                <p class="d-none d-md-block fs-4 pt-3 ps-2">Messages</p>
+            </div>
+            <div class="d-flex align-items-center  justify-content-sm-end justify-content-md-start left-sidebar-hover">
+                <span><i class="fa-solid fa-bookmark fs-5 py-3"></i></span>
+                <p class="d-none d-md-block fs-4 pt-3 ps-2">Bookmark</p>
+            </div>
+            <div class="d-flex align-items-center  justify-content-sm-end justify-content-md-start left-sidebar-hover">
+                <span><i class="fa-solid fa-file-lines fs-5 py-3"></i></span>
+                <p class="d-none d-md-block fs-4 pt-3 ps-2">List</p>
+            </div>
+            <div class="d-flex align-items-center  justify-content-sm-end justify-content-md-start left-sidebar-hover">
+                <span><i class="fa-solid fa-user fs-5 py-3"></i></span>
+                <p class="d-none d-md-block fs-4 pt-3 ps-2">Profile</p>
+            </div>
+            <div class="d-flex align-items-center  justify-content-sm-end justify-content-md-start left-sidebar-hover">
+                <span><i class="fa-solid fa-ellipsis fs-5 py-3"></i></span>
+                <p class="d-none d-md-block fs-4 pt-3 ps-2">More</p>
+            </div>
+            <div class="d-flex align-items-center  justify-content-sm-end justify-content-md-start">
+                <button type="button" class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <%= link_to "Post", new_post_path, data: { turbo_stream: true }, style: "color:white;text-decoration:none" %>
+                </button>
+            </div>
 
-<% if enduser_signed_in? %>
-  <%= link_to 'Sign out', destroy_enduser_session_path, data: { turbo_method: :delete }  %>
-<% else %>
-  <%= link_to 'Sign in', new_enduser_session_path %>
-<% end %>
+            <div class= "logout mt-5 p-2 border border-4 text-start rounded-pill ">
+                <span><%= image_tag "flawer.jpg", style: 'height:50px;width:50px;border-radius:50px' %></span>
+                <% if user_signed_in? %>
+                    <span><%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }  %></span>
+                <% else %>
+                    <%= link_to 'Sign in', new_user_session_path %>
+                <% end %>
+            </div>
+        </div>
+
+        <!-- MAIN SECTION -->
+        <div class="col-12 col-sm-10 col-md-9 col-lg-6  main_bar ">
+            <div class="row d-flex justify-content-between align-items-center ps-1">
+                <div class="col-1 pt-2">
+                    <div><span class="fs-4 fw-bold">Home</span></div>
+                </div>
+                <div class="col-1 me-3">
+                    <div><span class="fs-4"><i class="fa-solid fa-star"></i> </span></div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col pt-2 ">
+                    <div class="row">
+                        <div class="col-2">
+                            <%= image_tag "flawer.jpg", style: 'height:70px;width:70px;margin-bottom:20px;border-radius:50px' %>
+                            <%# <img class="rounded-circle" src="./asserts/images/profile.jfif" alt="" height="50px"> %>
+                        </div>
+                        <div class="col-9 col-sm-10 ">
+                            <%= render partial: 'posts/post', locals: { post: @post } %>
+                        </div>
+                    </div>
+                    <div class="row  d-flex  justify-content-between align-items-center border">
+                        <div class="col-11 col-sm-10 ps-5  pt-1 d-flex pt-2">
+                            <span><i class="fa-solid fa-comment"></i></span>
+                            <p class="ps-1">Bitcoin cryptocurrency. <span class="text-info fw-bold ">see
+                                    more</span></p>
+                        </div>
+                        <div class="col-1 col-sm-2 text-end fs-5 pt-2 ps-2">
+                            <span><i class="fa-solid fa-xmark"></i></span>
+                        </div>
+                    </div>
+                    <!-- TWEET 1 -->
+                    <% @posts.each do |post| %>
+                        <div class="row mt-1 border d-flex  ">
+                            <div class="col-3 mt-2">
+                                <%= image_tag "flawer.jpg", style: 'height:50px;width:50px;margin-bottom:20px;border-radius:50px' %>
+                                <%# <img class="rounded-circle" src="./asserts/images/profile.jfif" alt="" height="50px"> %>
+                            </div>
+                            <div class="col-9 ">
+                                <div class="row d-flex justify-content-between align-items-center ps-1">
+                                    <div class="col-10 pt-2 ">
+                                        <div>
+                                            <p><span class="fw-bold">Crypto Rover </span>@rovercrc . 23h</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 me-2 ps-0">
+                                        <div><span><i class="fa-solid fa-ellipsis fs-5 py-3"></i></span></div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <%# DO you think <span class="text-info">#Bitcoin</span> will hit $100,000 before 2025? %>
+                                    <%= post.description %>
+                                     <div class= "card ">   
+                                        <% if post.images.attached? %>
+                                            <% post.images.each do |image| %>
+                                                <span><%= image_tag url_for(image), size: "300", class: "card-img-top" %> </span>
+                                            <% end %>
+                                        <% end %>
+                                    </div> 
+
+                                    <!--<div class="row">
+                                        <% if post.images.attached? %>   
+                                            <% post.images.each do |image| %>
+                                                <div class="col-md-<%= 12 / post.images.size %> mb-3">
+                                                    <%= image_tag image.variant(resize_to_limit: [100, 300]), class: "img-fluid", alt: "Image" %>
+                                                </div>
+                                            <% end %>
+                                        <% end %>    
+                                    </div> -->
+                                    <br>
+                                    <div class="row pt-4">
+                                        <div class="col"><span><i class="fa-solid fa-comment"></i></span></div>
+                                        <div class="col"><span><i class="fa-solid fa-share-from-square"></i></span>
+                                        </div>
+                                        <div class="col"><i class="fa-solid fa-heart"></i></div>
+                                        <div class="col"><span><i class="fa-solid fa-share-nodes"></i></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <!-- RIGHT SIDE BAR -->
+        <div class="col-lg-3 d-none d-lg-block  w-25 h-25 right_side_bar">
+            <div class="">
+                <div class="bg-opacity-10 bg-black rounded-pill">
+                    <div class="row d-flex align-items-center ">
+                        <div class="col-2 text-end fs-4">
+                            <span><i class="fa-solid fa-magnifying-glass ps-4"></i></span>
+                        </div>
+                        <div class="col-10"><input type="text"
+                                class="form-control-lg border-0 me-1 w-75 bg-transparent"
+                                placeholder="Search Twitter"></div>
+                    </div>
+                </div>
+                <div class="row bg-opacity-10 bg-black mx-1 my-2 pb-3 rounded-3">
+                    <div class="col">
+                        <div class="trending">
+                            <p class="fs-6 fw-bold py-2">Trends for you</p>
+                            <div class="row">
+                                <div class="col-9">
+                                    <p class="m-0">Trending in Pakistan</p>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span><i class="fa-solid fa-ellipsis pe-2"></i></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="fs-6 fw-bold mb-0">Nawaz Sharif</p>
+                                    <p class="">12.7k Tweets</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-9">
+                                    <p class="m-0">Technology . Trending</p>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span><i class="fa-solid fa-ellipsis pe-2"></i></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="fs-6 fw-bold mb-0">#TikTok</p>
+                                    <p class="">101k Tweets</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-9">
+                                    <p class="m-0">Trending in Pakistan</p>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span><i class="fa-solid fa-ellipsis pe-2"></i></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="fs-6 fw-bold mb-0">Audio</p>
+                                    <p class="">132k Tweets</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-9">
+                                    <p class="m-0">Trending in Pakistan</p>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span><i class="fa-solid fa-ellipsis pe-2"></i></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="fs-6 fw-bold mb-0">#Bajwa</p>
+                                    <p class="">8,104 Tweets</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-9">
+                                    <p class="m-0">Trending in Pakistan</p>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span><i class="fa-solid fa-ellipsis pe-2"></i></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="fs-6 fw-bold mb-0">Shame</p>
+                                    <p class="">141k Tweets</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-9">
+                                    <p class="m-0">Trending in Pakistan</p>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span><i class="fa-solid fa-ellipsis pe-2"></i></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="fs-6 fw-bold mb-0">#dollarvsrupee</p>
+                                    <p class="">2,449 Tweets</p>
+                                </div>
+                            </div>
+
+                            <span class="text-info">Show more</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary text-start" data-bs-dismiss="modal">Close</button>
+      </div>
+      <div class="modal-body" id= "connect">
+      </div>
+    </div>
+  </div>
+</div>

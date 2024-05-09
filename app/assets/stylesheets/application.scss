@@ -13,3 +13,45 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap";
+@import 'rails_emoji_picker';
+
+
+/*
+ *= require_tree .
+ *= require rails_emoji_picker
+ *= require bootstrap
+ *= require_self
+ */
+
+.textarea {
+  resize:none;
+  outline:none;
+}
+
+
+.label-hover:hover{
+  cursor:pointer;
+  color:gray;
+  opacity: 0.5;
+}
+
+input:focus{
+  outline: none;
+}
+div.right_side_bar{
+  position: fixed;
+  right: 30px;
+  top: 10px;
+}
+.left_sidebar{
+  position: sticky;
+  top: 0px;
+  height: fit-content;
+}
+
+.left-sidebar-hover:hover{
+  // border: 2px solid gray;
+  background-color: lightcyan;
+  border-radius: 40px;
+}

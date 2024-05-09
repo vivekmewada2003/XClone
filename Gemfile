@@ -67,3 +67,9 @@ group :test do
 end
 
 gem 'devise', '~> 4.9.2'
+
+#for bootsrap
+gem "bootstrap"
+gem "sassc-rails"
+
+gem 'image_processing', '~> 1.2'

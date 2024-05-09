@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :endusers
+  devise_for :users
   get 'homes/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
+  resources :posts
   root "homes#index"
 end
