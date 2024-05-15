@@ -98,14 +98,13 @@
                             <%# <img class="rounded-circle" src="./asserts/images/profile.jfif" alt="" height="50px"> %>
                         </div>
                         <div class="col-9 col-sm-10 ">
-                            <%= render partial: 'posts/post', locals: { post: @post } %>
+                            <%= render 'posts/post' %>
                         </div>
                     </div>
                     <div class="row  d-flex  justify-content-between align-items-center border">
                         <div class="col-11 col-sm-10 ps-5  pt-1 d-flex pt-2">
                             <span><i class="fa-solid fa-comment"></i></span>
-                            <p class="ps-1">Bitcoin cryptocurrency. <span class="text-info fw-bold ">see
-                                    more</span></p>
+                            <p class="ps-1">Bitcoin cryptocurrency. <span class="text-info fw-bold ">see more</span></p>
                         </div>
                         <div class="col-1 col-sm-2 text-end fs-5 pt-2 ps-2">
                             <span><i class="fa-solid fa-xmark"></i></span>
@@ -131,24 +130,7 @@
                                 </div>
                                 <div class="col">
                                     <%# DO you think <span class="text-info">#Bitcoin</span> will hit $100,000 before 2025? %>
-                                    <%= post.description %>
-                                     <div class= "card ">   
-                                        <% if post.images.attached? %>
-                                            <% post.images.each do |image| %>
-                                                <span><%= image_tag url_for(image), size: "300", class: "card-img-top" %> </span>
-                                            <% end %>
-                                        <% end %>
-                                    </div> 
-
-                                    <!--<div class="row">
-                                        <% if post.images.attached? %>   
-                                            <% post.images.each do |image| %>
-                                                <div class="col-md-<%= 12 / post.images.size %> mb-3">
-                                                    <%= image_tag image.variant(resize_to_limit: [100, 300]), class: "img-fluid", alt: "Image" %>
-                                                </div>
-                                            <% end %>
-                                        <% end %>    
-                                    </div> -->
+                                    <%= post.content %>
                                     <br>
                                     <div class="row pt-4">
                                         <div class="col"><span><i class="fa-solid fa-comment"></i></span></div>
@@ -293,3 +275,6 @@
     </div>
   </div>
 </div>
+
+
+
