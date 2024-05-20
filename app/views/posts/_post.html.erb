@@ -1,36 +1,23 @@
-<div class="col-12 col-sm-9">
-  <%= form_with model: @post do |form| %>
+<div class="col-12 col-sm-9" >
+  <%= form_with model: @post, data: { controller: "emoji-picker" } do |form| %>
     <div class="col-9 col-sm-9 ">
-      <div class="field">
-        <%= form.rich_text_area :content %>
+
+      <%= content_tag(:div, "", class:"pickerContainer" , data: {
+        emoji_picker_target: "pickerContainer"
+      }) %>
+      <div class="field" >
+          <%= form.rich_text_area :content, placeholder: "What is Happning!!..", class: "border-0 bg form-control-lg overflow-hidden textarea", data: {
+            emoji_picker_target: "trixEditor"
+          } %>
       </div>
-      <%# <%= form.text_area :description, placeholder: 'What is happening?!', class: "border-0 bg form-control-lg overflow-hidden textarea" %>
+
       <div class="ps-3 d-flex text-info">
         <p><span><i class="fa-solid fa-earth-americas "></i></span></p>
         <p class="fw-bold text-nowrap">Everyone can reply</p>
       </div>
 
-        <%# <input type="file" id="file" style="display: none" name="image" accept="image/gif,image/jpeg,image/jpg,image/png" multiple="" data-original-title="upload photos"> %>
-
-      
       <div class="row pb-2 justify-content-center">
         <div class="col-9 text-info d-flex "> 
-
-           <a href="link_url_1" class="ps-3">
-            <span class="fa-solid fa-image"></span>
-          </a>
-
-          <a href="link_url_1" class="ps-3">
-            <span class="fa-solid fa-gift"></span>
-          </a>
-
-          <a href="link_url_2" class="ps-3">
-            <span class="fa-solid fa-face-grin"></span>
-          </a>
-
-          <a href="link_url_3" class="ps-3">
-            <span class="fa-solid fa-location-pin"></span>
-          </a>
           <div class="ps-3 text-end">
               <%= form.submit "Post", class: "btn btn-primary text-decoration-none fs-6 fw-bold text-white bg-info py-1 px-5 rounded-pil" %>
           </div>
