@@ -1,0 +1,3 @@
+<%= turbo_stream.append "post_#{ @post.id }_likes" do %>
+    <%= render partial: 'likes/like_button', locals: { post: @post } %>
+<% end %>

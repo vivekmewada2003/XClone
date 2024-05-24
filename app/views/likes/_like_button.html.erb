@@ -1,0 +1,12 @@
+<%= form_for(post.likes.build, url: post_likes_path(post), data: { turbo_stream: true } ) do |f| %>
+    <%= f.hidden_field :likeable_type, value: post.class %>
+    <%= f.hidden_field :likeable_id, value: post.id %>
+    <%= f.hidden_field :user_id, value: current_user.id  %>
+    <button type="submit" style="border:none;background:none;">
+        <% if post.likes.exists?(user: current_user.id) %>
+            <span style="font-size: 14px">❤️</span>
+        <% else %>
+            <i class="fa-regular fa-heart"></i>
+        <% end %>
+    </button>
+<% end %>

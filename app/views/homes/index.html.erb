@@ -31,7 +31,6 @@
             </div>
             <div class="d-flex align-items-center d-block d-md-none  justify-content-sm-end justify-content-md-start justify-content-sm-end justify-content-md-start">
                 <span><i class="fa-solid fa-magnifying-glass fs-5 py-3 "></i></span>
-                <!-- <p class="d-none d-lg-block fs-3 pt-3 ps-1">Home</p> -->
             </div>
             <div class="d-flex align-items-center  justify-content-sm-end justify-content-md-start left-sidebar-hover">
                 <span><i class="fa-solid fa-hashtag fs-5 py-3 d-none d-md-block"></i></span>
@@ -92,7 +91,6 @@
                     <div class="row">
                         <div class="col-2">
                             <%= image_tag "flawer.jpg", style: 'height:70px;width:70px;margin-bottom:20px;border-radius:50px' %>
-                            <%# <img class="rounded-circle" src="./asserts/images/profile.jfif" alt="" height="50px"> %>
                         </div>
                         <div class="col-9 col-sm-10 ">
                             <%= render 'posts/post' %>
@@ -112,13 +110,12 @@
                         <div class="row mt-1 border d-flex  ">
                             <div class="col-3 mt-2">
                                 <%= image_tag "flawer.jpg", style: 'height:50px;width:50px;margin-bottom:20px;border-radius:50px' %>
-                                <%# <img class="rounded-circle" src="./asserts/images/profile.jfif" alt="" height="50px"> %>
                             </div>
                             <div class="col-9 ">
                                 <div class="row d-flex justify-content-between align-items-center ps-1">
                                     <div class="col-10 pt-2 ">
                                         <div>
-                                            <p><span class="fw-bold">Crypto Rover </span>@rovercrc . 23h</p>
+                                            <p><span class="fw-bold"><%= post.user.email %> </span>. 23h</p>
                                         </div>
                                     </div>
                                     <div class="col-1 me-2 ps-0">
@@ -126,13 +123,20 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <%# DO you think <span class="text-info">#Bitcoin</span> will hit $100,000 before 2025? %>
                                     <%= post.content %>
                                     <br>
                                     <div class="row pt-4">
                                         <div class="col"><span><i class="fa-solid fa-comment"></i></span></div>
                                         <div class="col"><span><i class="fa-solid fa-share-from-square"></i></span></div>
-                                        <div class="col"><i class="fa-solid fa-heart"></i></div>
+                                        <div class="col">
+                                            <%= turbo_stream_from "all_likes" %>
+                                                <turbo-frame id="post_<%= post.id %>_likes" style= "display: inline-block">
+                                                    <%= render partial: 'likes/like_button', locals: { post: post } %>
+                                                </turbo-frame >
+                                                <span style="font-family:Arial,sans-serif;font-size:15px;" id="likeCount_<%= post.id %>" >
+                                                    <%= post.likes.count %>
+                                                </span>
+                                        </div> 
                                         <div class="col"><span><i class="fa-solid fa-share-nodes"></i></span></div>
                                     </div>
                                 </div>
@@ -271,6 +275,3 @@
     </div>
   </div>
 </div>
-
-
-

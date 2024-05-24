@@ -72,3 +72,5 @@ gem 'devise', '~> 4.9.2'
 gem "bootstrap"
 gem "sassc-rails"
 
+
+gem "pry", "~> 0.14.2"
