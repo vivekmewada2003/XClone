@@ -93,7 +93,7 @@
                             <%= image_tag "flawer.jpg", style: 'height:70px;width:70px;margin-bottom:20px;border-radius:50px' %>
                         </div>
                         <div class="col-9 col-sm-10 ">
-                            <%= render 'posts/post' %>
+                            <%= render 'posts/form' %>
                         </div>
                     </div>
                     <div class="row  d-flex  justify-content-between align-items-center border">
@@ -106,41 +106,10 @@
                         </div>
                     </div>
                     <!-- TWEET 1 -->
+                    <%= turbo_stream_from "all_posts" %>
                     <% @posts.each do |post| %>
-                        <div class="row mt-1 border d-flex  ">
-                            <div class="col-3 mt-2">
-                                <%= image_tag "flawer.jpg", style: 'height:50px;width:50px;margin-bottom:20px;border-radius:50px' %>
-                            </div>
-                            <div class="col-9 ">
-                                <div class="row d-flex justify-content-between align-items-center ps-1">
-                                    <div class="col-10 pt-2 ">
-                                        <div>
-                                            <p><span class="fw-bold"><%= post.user.email %> </span>. 23h</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-1 me-2 ps-0">
-                                        <div><span><i class="fa-solid fa-ellipsis fs-5 py-3"></i></span></div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <%= post.content %>
-                                    <br>
-                                    <div class="row pt-4">
-                                        <div class="col"><span><i class="fa-solid fa-comment"></i></span></div>
-                                        <div class="col"><span><i class="fa-solid fa-share-from-square"></i></span></div>
-                                        <div class="col">
-                                            <%= turbo_stream_from "all_likes" %>
-                                                <turbo-frame id="post_<%= post.id %>_likes" style= "display: inline-block">
-                                                    <%= render partial: 'likes/like_button', locals: { post: post } %>
-                                                </turbo-frame >
-                                                <span style="font-family:Arial,sans-serif;font-size:15px;" id="likeCount_<%= post.id %>" >
-                                                    <%= post.likes.count %>
-                                                </span>
-                                        </div> 
-                                        <div class="col"><span><i class="fa-solid fa-share-nodes"></i></span></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="each_post">
+                            <%= render partial: "posts/post", locals: { post: post } %>
                         </div>
                     <% end %>
                 </div>
@@ -155,8 +124,9 @@
                             <span><i class="fa-solid fa-magnifying-glass ps-4"></i></span>
                         </div>
                         <div class="col-10"><input type="text"
-                                class="form-control-lg border-0 me-1 w-75 bg-transparent"
-                                placeholder="Search Twitter"></div>
+                            class="form-control-lg border-0 me-1 w-75 bg-transparent"
+                            placeholder="Search Twitter">
+                        </div>
                     </div>
                 </div>
                 <div class="row bg-opacity-10 bg-black mx-1 my-2 pb-3 rounded-3">

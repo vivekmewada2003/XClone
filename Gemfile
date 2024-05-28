@@ -66,11 +66,12 @@ group :test do
   gem "selenium-webdriver"
 end
 
+#Authentication
 gem 'devise', '~> 4.9.2'
 
 #for bootsrap
 gem "bootstrap"
 gem "sassc-rails"
 
-
+#for debugging
 gem "pry", "~> 0.14.2"

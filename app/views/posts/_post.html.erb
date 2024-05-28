@@ -1,30 +1,36 @@
-<div class="col-12 col-sm-9" >
-  <%= form_with model: @post, data: { controller: "emoji-picker" } do |form| %>
-    <div class="col-9 col-sm-9 ">
-
-      <%= content_tag(:div, "", class:"pickerContainer" , data: {
-        emoji_picker_target: "pickerContainer"
-      }) %>
-      <div class="field" >
-          <%= form.rich_text_area :content, placeholder: "What is Happning!!..", class: "border-0 bg form-control-lg overflow-hidden textarea", data: {
-            emoji_picker_target: "trixEditor"
-          } %>
-      </div>
-
-      <div class="ps-3 d-flex text-info">
-        <p><span><i class="fa-solid fa-earth-americas "></i></span></p>
-        <p class="fw-bold text-nowrap">Everyone can reply</p>
-      </div>
-
-      <div class="row pb-2 justify-content-center">
-        <div class="col-9 text-info d-flex "> 
-          <div class="ps-3 text-end">
-              <%= form.submit "Post", class: "btn btn-primary text-decoration-none fs-6 fw-bold text-white bg-info py-1 px-5 rounded-pil" %>
-          </div>
-        </div>
-      </div>
+<div class="row mt-1 border d-flex " >
+    <div class="col-3 mt-2">
+        <%= image_tag "flawer.jpg", style: 'height:50px;width:50px;margin-bottom:20px;border-radius:50px' %>
     </div>
-  <% end %>
+    <div class="col-9 ">
+        <div class="row d-flex justify-content-between align-items-center ps-1">
+            <div class="col-10 pt-2 ">
+                <div>
+                    
+                    <p><span class="fw-bold"><%= post.user.email %> </span>. 23h</p>
+                </div>
+            </div>
+            <div class="col-1 me-2 ps-0">
+                <div><span><i class="fa-solid fa-ellipsis fs-5 py-3"></i></span></div>
+            </div>
+        </div>
+        <div class="col">
+            <%= post.content %>
+            <br>
+            <div class="row pt-4">
+                <div class="col"><span><i class="fa-solid fa-comment"></i></span></div>
+                <div class="col"><span><i class="fa-solid fa-share-from-square"></i></span></div>
+                <div class="col">
+                    <%= turbo_stream_from "all_likes" %>
+                    <turbo-frame id="post_<%= post.id %>_likes" style= "display: inline-block">
+                        <%= render partial: 'likes/like_button', locals: { post: post } %>
+                    </turbo-frame >
+                    <span style="font-family:Arial,sans-serif;font-size:15px;" id="likeCount_<%= post.id %>" >
+                        <%= post.likes.count %>
+                    </span>
+                </div> 
+                <div class="col"><span><i class="fa-solid fa-share-nodes"></i></span></div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
