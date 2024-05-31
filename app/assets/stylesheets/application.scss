@@ -52,7 +52,42 @@ div.right_side_bar{
 }
 
 .left-sidebar-hover:hover{
-  // border: 2px solid gray;
   background-color: lightcyan;
   border-radius: 40px;
+}
+
+
+.border-disable{
+  border: none;
+}
+
+.btn-hover:hover {
+  border-radius: 50%;
+  background-color: rgb(156, 208, 232);
+  color: rgb(58, 58, 228);
+  opacity: 0.5;
+}
+
+.btn-style{
+  padding-top: 0px;
+  font-size: 18px;
+}
+
+.like-hover:hover{
+  color: red;
+  box-shadow: 0px 0px 2px 9px #b3343447;
+  border-radius: 25px;
+  background-color: #b3343447;
+}
+
+.replay-hover {
+  text-decoration:none;
+  color:black;
+}
+
+.replay-hover:hover{
+  color: blue;
+  box-shadow: 0px 0px 2px 9px #1a78d047;
+  border-radius: 25px;
+  background-color: #1a78d047;
 }

@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   # resources :likes
   resources :posts do
     resources :likes, only: [:create, :destroy]
+    get 'replay', to: 'posts#replay', as: 'replay'
+    post 'replay', to: 'posts#replay_create', as: 'replay_create'
   end
 end
