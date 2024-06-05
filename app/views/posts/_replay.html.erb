@@ -5,7 +5,7 @@
              <span >Replying to <b style='color: #5087d8'><%= @post.user.email %></b>
 
             <div class="field" >
-                <%= form.rich_text_area :content, value: '', placeholder: "What is Happning!!..", class: "border-0 bg form-control-lg overflow-hidden textarea" %>
+                <%= form.rich_text_area :content, value: '', placeholder: "Post your Reply  !!..", class: "border-0 bg form-control-lg overflow-hidden textarea" %>
             </div>
 
             <%= form.hidden_field :parent_id, value: params[:post_id] %>

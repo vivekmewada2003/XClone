@@ -19,7 +19,7 @@
             <div class="row pb-2 justify-content-center">
                 <div class="col-9 text-info d-flex "> 
                     <div class="ps-3 text-end">
-                        <%= form.submit "Post", class: "btn btn-primary text-decoration-none fs-6 fw-bold text-white bg-info py-1 px-5 rounded-pil" %>
+                        <%= form.submit "Post", class: "btn btn-primary text-decoration-none fs-6 fw-bold text-white bg-info py-1 px-5 rounded-pil", data: { action: 'click->closepopup#closeEvent' }%>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 <div class="container-fluid container-md">
-                <!-- xs NAV BAR -->
+                <!-- NAV BAR -->
     <nav class=" bg-light xs-nav fixed-bottom    d-sm-none">
         <div class="container-fluid">
             <div class="row h-50">
@@ -61,7 +61,7 @@
                 <p class="d-none d-md-block fs-4 pt-3 ps-2">More</p>
             </div>
             <div class="d-flex align-items-center  justify-content-sm-end justify-content-md-start">
-                <button type="button" class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                <button type="button" class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#new_PostModal">
                     <%= link_to "Post", new_post_path, data: { turbo_stream: true }, style: "color:white;text-decoration:none" %>
                 </button>
             </div>
@@ -96,21 +96,11 @@
                             <%= render 'posts/form' %>
                         </div>
                     </div>
-                    <div class="row  d-flex  justify-content-between align-items-center border">
-                        <div class="col-11 col-sm-10 ps-5  pt-1 d-flex pt-2">
-                            <span><i class="fa-solid fa-comment"></i></span>
-                            <p class="ps-1">Bitcoin cryptocurrency. <span class="text-info fw-bold ">see more</span></p>
-                        </div>
-                        <div class="col-1 col-sm-2 text-end fs-5 pt-2 ps-2">
-                            <span><i class="fa-solid fa-xmark"></i></span>
-                        </div>
-                    </div>
-                    <!-- TWEET 1 -->
+                    <!-- TWEETS -->
                     <%= turbo_stream_from "all_posts" %>
                     <div id= "post_records">
                         <%= render @posts %>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -123,8 +113,7 @@
                             <span><i class="fa-solid fa-magnifying-glass ps-4"></i></span>
                         </div>
                         <div class="col-10"><input type="text"
-                            class="form-control-lg border-0 me-1 w-75 bg-transparent"
-                            placeholder="Search Twitter">
+                            class="form-control-lg border-0 me-1 w-75 bg-transparent" placeholder="Search Twitter">
                         </div>
                     </div>
                 </div>
@@ -221,28 +210,25 @@
                                     <p class="">2,449 Tweets</p>
                                 </div>
                             </div>
-
                             <span class="text-info">Show more</span>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModal1Label" aria-hidden="true" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary text-start" data-bs-dismiss="modal">Close</button>
-      </div>
-      <div class="modal-body" id= "connect">
-      </div>
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="new_PostModal" tabindex="-1" aria-labelledby="new_PostModalLabel" aria-hidden="true" >
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary text-start" data-bs-dismiss="modal">Close</button>
+            </div>
+            <div class="modal-body" id= "connect"></div>
+        </div>
     </div>
-  </div>
 </div>
 
 

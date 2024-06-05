@@ -24,12 +24,10 @@
                             </li>
 
                             <li>
-                                <button type="button" class="btn border-disable" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn border-disable" data-bs-toggle="modal" data-bs-target="#editPostModal">
                                     <%= link_to "Edit", edit_post_path(post), class: "dropdown-item", data: { turbo_stream: true } %>
                                 </button>
                             </li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </div>
                 </div>
@@ -53,17 +51,38 @@
                 <div class="row pt-4">
                     <div class="col">
                         <button type="button" class=" btn border-disable btn-style" data-bs-toggle="modal" data-bs-target="#replayModal">
-                            <%= link_to "", post_replay_path(post), data: { turbo_stream: true }, class: "fa-regular fa-comment-dots replay-hover" %>
+                            <%= link_to "", post_replay_path(post), data: { turbo_stream: true }, class: "fa-regular fa-comment-dots replay-button link-decoration" %>
                         </button>
-                             <span style="font-family:Arial,sans-serif;font-size:15px;margin-left:-9px;" id="replayCount_<%= post.id %>" >
+                        <% if !(post.replays.empty?) %>
+                            <span style="font-family:Arial,sans-serif;font-size:15px;margin-left:-9px;" id="replayCount_<%= post.id %>" >
                                 <%= post.replays.count %>
                             </span>
+                        <% else %>
+                            <span style="font-family:Arial,sans-serif;font-size:15px;margin-left:-9px;" id="replayCount_<%= post.id %>"><span>
+                        <% end %>
                     </div>
-                    <div class="col"><span><i class="fa-solid fa-share-from-square"></i></span></div>
+
+                    <div class="col">
+                        <div class="dropup-center dropup">
+                            <button class="btn border-disable" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding-top:0px;">
+                                <turbo-frame id="repost_button_<%= post.id %>" style= "display: inline-block">
+                                    <%= render 'posts/repost_button', post: post %>
+                                </turbo-frame >
+                                <%= turbo_stream_from "for_repost_count" %>
+                            </button>
+                            <span id="broadcast_repost_<%= post.id %>" style="margin-left:-9px;">
+                                <%= render 'posts/repost_count', post: post %>
+                            </span>
+                            <ul class="dropdown-menu">
+                                <li><%= link_to "Repost", post_repost_path(post), data: { turbo_stream: true }, class: "link-decoration ps-3" %></li>
+                                <li><a class="dropdown-item" href="#">Quate</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="col">
                         <%= turbo_stream_from "all_likes" %>
                         <turbo-frame id="post_<%= post.id %>_likes" style= "display: inline-block">
-                            <%= render partial: 'likes/like_button', locals: { post: post } %>
+                            <%= render 'likes/like_button', post: post %>
                         </turbo-frame >
                         <span style="font-family:Arial,sans-serif;font-size:15px;" id="likeCount_<%= post.id %>" >
                             <%= post.likes.count %>
@@ -76,7 +95,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true" data-controller="closepopup">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-footer">
@@ -94,7 +113,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text-start" data-bs-dismiss="modal">Close</button>
             </div>
-            <div class="modal-body" id= "replay_id"></div>
+            <div class="modal-body" id="replay_id"></div>
         </div>
     </div>
 </div>

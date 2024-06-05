@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
+    @post = current_user.posts.build(post_params)
     @post.save
   end
 
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   end
 
   def replay_create
-    @post = current_user.posts.build(replay_params)
+    @post = current_user.posts.build(post_params)
     @post.save
   end
 
@@ -24,28 +24,36 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
-      redirect_to root_path
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    @post.update(post_params)
   end
 
   def destroy 
     @post.destroy
   end
 
+  def repost
+    @post = Post.find(params[:post_id])
+    if @post.reposts.exists?(user: current_user)
+      Post.destroy_by(repost_id: @post.id, user_id: current_user.id)
+    else
+      @repost = current_user.posts.build(repost_id: @post.id, content: @post.content, repost_status: true )
+      @repost.save
+      @repost.repost_call
+    end
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:content)
-  end
-
-  def replay_params
-    params.require(:post).permit(:content, :parent_id)
+    if request.url.split('/').last == 'replay'
+      params.require(:post).permit(:content, :parent_id)
+    else
+      params.require(:post).permit(:content)
+    end
   end
 
   def set_post
     @post = Post.find(params[:id])
   end
+
 end

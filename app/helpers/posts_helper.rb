@@ -1,4 +1,5 @@
 module PostsHelper
+  #check nested replys
   def parent_emails(post)
     emails = []
     current_post = post

@@ -65,10 +65,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_052416) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "parent_id"
+    t.integer "repost_id"
+    t.boolean "repost_status", default: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_posts_on_parent_id"
+    t.index ["repost_id"], name: "index_posts_on_repost_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -88,5 +91,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_052416) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "posts", column: "parent_id"
+  add_foreign_key "posts", "posts", column: "repost_id"
   add_foreign_key "posts", "users"
 end
