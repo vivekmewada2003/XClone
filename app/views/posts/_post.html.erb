@@ -1,13 +1,27 @@
 <div id= "post_<%= post.id %>">
     <div class="row mt-1 border d-flex " >
-        <div class="col-3 mt-2">
-            <%= image_tag "flawer.jpg", style: 'height:50px;width:50px;margin-bottom:20px;border-radius:50px' %>
+        <div>
+            <% if post.repost_status %>
+                <i class="bi bi-arrow-repeat"></i> You Reposted
+            <% end %>
         </div>
-        <div class="col-9 ">
+        <div class="col-3 mt-2">
+            <% if post.user.profile&.avatar.present? %>
+                <%= image_tag  post.user.profile.avatar, class:"img-style" %>
+            <% else %>
+                <%= image_tag "flawer.jpg", class:"img-style" %>
+            <% end %>
+        </div>
+        <div class="col-9">
             <div class="row d-flex justify-content-between align-items-center ps-1">
                 <div class="col-10 pt-2 ">
                     <div>
-                        <p><span class="fw-bold" style="font-size:20px;"><%= post.user.email %> </span><span class="opacity-50"><%= post.created_at.to_date %></span></p>
+                        <p>
+                            <span class="fw-bold" style="font-size:20px;">
+                                <%= post.user.profile.present? ? post.user.profile.name.capitalize : post.user.email %>
+                            </span>
+                            <span class="opacity-50"><%= post.created_at.to_date %></span>
+                        </p>
                     </div>
                 </div>
                 <div class="col-1 me-2 ps-0">
@@ -16,18 +30,28 @@
                             <i class="fa-solid fa-ellipsis outline-disable"></i>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li>
-                                <%= link_to post_path(post), class: "dropdown-item text-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                    <span>Delete</span>
-                                <% end %>
-                            </li>
+                            <% if post.user == @current_user %>
+                                <li>
+                                    <%= link_to post_path(post), class: "dropdown-item text-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        <span>Delete</span>
+                                    <% end %>
+                                </li>
 
-                            <li>
-                                <button type="button" class="btn border-disable" data-bs-toggle="modal" data-bs-target="#editPostModal">
-                                    <%= link_to "Edit", edit_post_path(post), class: "dropdown-item", data: { turbo_stream: true } %>
-                                </button>
-                            </li>
+                                <li>
+                                    <button type="button" class="btn border-disable" data-bs-toggle="modal" data-bs-target="#editPostModal">
+                                        <%= link_to "Edit", edit_post_path(post), class: "dropdown-item", data: { turbo_stream: true } %>
+                                    </button>
+                                </li>
+                            <% else %>
+                                <li>
+                                   <button type="button" class="btn border-disable">follow</button>
+                                </li>
+
+                                <li>
+                                    <button type="button" class="btn border-disable">unfollow</button>
+                                </li>
+                            <% end %>
                         </ul>
                     </div>
                 </div>
@@ -50,7 +74,7 @@
                 <br>
                 <div class="row pt-4">
                     <div class="col">
-                        <button type="button" class=" btn border-disable btn-style" data-bs-toggle="modal" data-bs-target="#replayModal">
+                        <button type="button" class=" btn border-disable replay-btn-style" data-bs-toggle="modal" data-bs-target="#replayModal">
                             <%= link_to "", post_replay_path(post), data: { turbo_stream: true }, class: "fa-regular fa-comment-dots replay-button link-decoration" %>
                         </button>
                         <% if !(post.replays.empty?) %>
@@ -82,7 +106,7 @@
                     <div class="col">
                         <%= turbo_stream_from "all_likes" %>
                         <turbo-frame id="post_<%= post.id %>_likes" style= "display: inline-block">
-                            <%= render 'likes/like_button', post: post %>
+                            <%= render 'likes/like_button', post: post, data: { turbo_stream: true } %>
                         </turbo-frame >
                         <span style="font-family:Arial,sans-serif;font-size:15px;" id="likeCount_<%= post.id %>" >
                             <%= post.likes.count %>

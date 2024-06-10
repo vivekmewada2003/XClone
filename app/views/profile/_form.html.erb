@@ -1,0 +1,22 @@
+<div class="w-40">
+    <%= form_for current_user.build_profile, url: profile_index_path , style:"width:25px;height:20px;" do |form| %>
+        <div>
+            <%= form.label :name %>
+            <%= form.text_field :name, class: "form-control" %>
+        </div>
+
+        <div>
+            <%= form.label :bio %>
+            <%= form.text_area :bio, class: "form-control"%>
+        </div>
+
+        <div>
+            <%= form.label :image %>
+            <%= form.file_field :avatar, class: "form-control" %>
+        </div><br>
+
+        <div>
+            <%= form.submit "update", class:"btn btn-primary", style:"float:right", data: { action: 'click->closepopup#closeEvent'} %>
+        </div>
+    <% end %>
+</div>

@@ -15,7 +15,8 @@
  */
 @import "bootstrap";
 @import "actiontext";
-
+@import "post";
+@import "profiles";
 
 
 /*
@@ -25,76 +26,43 @@
  *= require_self
  */
 
-.textarea {
-  resize:none;
-  outline:none;
+.border-disable {
+  border: none;
 }
 
-
-.label-hover:hover{
+.label-hover:hover {
   cursor:pointer;
   color:gray;
   opacity: 0.5;
 }
 
-input:focus{
+input:focus {
   outline: none;
 }
-div.right_side_bar{
+
+div.right_side_bar {
   position: fixed;
   right: 30px;
   top: 10px;
 }
-.left_sidebar{
+
+.left_sidebar {
   position: sticky;
   top: 0px;
   height: fit-content;
 }
 
-.left-sidebar-hover:hover{
+.right-sidebar {
+  margin-left: -5.9rem;
+  margin-right: 7rem;
+}
+
+.left-sidebar-hover:hover {
   background-color: lightcyan;
   border-radius: 40px;
-}
-
-
-.border-disable{
-  border: none;
-}
-
-.btn-hover:hover {
-  border-radius: 50%;
-  background-color: rgb(156, 208, 232);
-  color: rgb(58, 58, 228);
-  opacity: 0.5;
-}
-
-.btn-style{
-  padding-top: 0px;
-  font-size: 18px;
-}
-
-.like-hover:hover{
-  color: red;
-  box-shadow: 0px 0px 2px 9px #b3343447;
-  border-radius: 25px;
-  background-color: #b3343447;
 }
 
 .link-decoration {
   text-decoration:none;
   color:black;
-}
-
-.replay-button:hover{
-  color: blue;
-  box-shadow: 0px 0px 2px 9px #1a78d047;
-  border-radius: 25px;
-  background-color: #1a78d047;
-}
-
-.repost-button:hover{
-  color: green;
-  box-shadow: 0px 0px 2px 9px #a1d6a1;
-  border-radius: 25px;
-  background-color: #a1d6a1;
 }

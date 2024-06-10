@@ -1,0 +1,84 @@
+<div class="w-50 p-3">
+    <div class="container-fluid " style="height: 45vh">
+        <div class="rounded" style= "height:20vh;background-color:#b6babe;">
+
+        </div>
+        <span>
+            <% if user_profile&.avatar.present? %>
+                <%= image_tag user_profile.avatar, class: "profile-img" %>
+            <% else %>
+                <%= image_tag "flawer.jpg", class:"profile-img" %>
+            <% end %>
+        </span>
+            <button type="button" class="btn btn-primary float-end mt-4 bg-light border border-2 rounded-pill profile-edit-button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                    <%= link_to "edit profile", new_profile_path, data: { turbo_stream: true, action: 'click->closepopup#closeEvent' }, style: "color:black;text-decoration:none" %>
+            </button>
+        <div>
+            <% if user_profile %>
+                <h3><%= user_profile.name.capitalize %></h3>
+                <p><%= user_profile.bio %></p>
+            <% else %>
+                <h5><%= @current_user.email %></h5>
+                <p>...<p>
+            <% end %>
+                <p><i class="bi bi-calendar3"></i> Joined <%= @current_user.created_at.to_date.strftime('%B %Y') %></p>
+        </div>
+    </div>
+    <div class="card-body pt-3">
+    <hr>
+        <ul class="nav nav-tabs nav-tabs-bordered">
+            <li class="nav-item">
+                <button class="nav-link active me-5" data-bs-toggle="tab" data-bs-target="#profile-post">Posts</button>
+            </li>
+
+            <li class="nav-item">
+                <button class="nav-link me-5 hello" data-bs-toggle="tab" data-bs-target="#profile-replies">Replies</button>
+            </li>
+
+            <li class="nav-item">
+                <button class="nav-link me-5" data-bs-toggle="tab" data-bs-target="#profile-likes">Likes</button>
+            </li>
+
+            <li class="nav-item">
+                <button class="nav-link me-5" data-bs-toggle="tab" data-bs-target="#profile-media">Media</button>
+            </li>
+        </ul>
+        <div class="tab-content pt-2">
+            <div class="tab-pane fade show active profile-post" id="profile-post">
+                <%= render @posts %>
+            </div>
+
+            <div class="tab-pane fade profile-replies pt-3" id="profile-replies">
+                <%= render @replays %>
+            </div>
+
+            <div class="tab-pane fade pt-3" id="profile-likes">
+                <%= render @likes %>
+            </div>
+
+            <div class="tab-pane fade pt-3" id="profile-media">
+               
+                <% @posts.each do |post| %>
+                    <% if post.content.embeds.present? %> 
+                        <%= post.content.to_s.scan(/<action-text-attachment.*?<\/action-text-attachment>/m)[0].gsub(/<span.*?<\/span>/, '').html_safe %>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<div>
+
+<%# Edit Profile Bootstrap Model %>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-controller="closepopup">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="update_profile"></div>
+            </div>
+        </div>
+    </div>
+</div>

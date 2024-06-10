@@ -1,0 +1,52 @@
+.textarea {
+  resize:none;
+  outline:none;
+}
+
+.border-disable {
+  border: none;
+}
+
+//repost button
+.repost-button:hover {
+  color: green;
+  box-shadow: 0px 0px 2px 9px #a1d6a1;
+  border-radius: 25px;
+  background-color: #a1d6a1;
+}
+
+// edit bution
+.btn-hover:hover {
+  border-radius: 50%;
+  background-color: rgb(156, 208, 232);
+  color: rgb(58, 58, 228);
+  opacity: 0.5;
+}
+
+// like button
+.like-hover:hover {
+  color: red;
+  box-shadow: 0px 0px 2px 9px #b3343447;
+  border-radius: 25px;
+  background-color: #b3343447;
+}
+
+// replay button
+.replay-button:hover {
+  color: blue;
+  box-shadow: 0px 0px 2px 9px #1a78d047;
+  border-radius: 25px;
+  background-color: #1a78d047;
+}
+
+.replay-btn-style {
+  padding-top: 0px;
+  font-size: 18px;
+}
+
+.img-style{
+  height:60px;
+  width:60px;
+  margin:0px 0px 20px 22px;
+  border-radius:50px;
+}

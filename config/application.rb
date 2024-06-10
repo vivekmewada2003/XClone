@@ -16,6 +16,9 @@ module XClone
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
 
+    #for the image show for every post
+    config.action_controller.default_url_options = { host: 'localhost:3000', port: 3000 }
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

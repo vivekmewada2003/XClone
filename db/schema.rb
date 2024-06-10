@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_21_052416) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_05_072829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_052416) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.text "name"
+    t.string "bio"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -93,4 +102,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_052416) do
   add_foreign_key "posts", "posts", column: "parent_id"
   add_foreign_key "posts", "posts", column: "repost_id"
   add_foreign_key "posts", "users"
+  add_foreign_key "profiles", "users"
 end

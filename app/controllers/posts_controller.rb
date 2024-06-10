@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:destroy, :update, :edit]
+  before_action :set_post_id, only: [:replay, :repost]
 
   def new
     @post = current_user.posts.build
@@ -10,17 +11,7 @@ class PostsController < ApplicationController
     @post.save
   end
 
-  def replay
-    @post = Post.find(params[:post_id])
-  end
-
-  def replay_create
-    @post = current_user.posts.build(post_params)
-    @post.save
-  end
-
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
@@ -31,8 +22,15 @@ class PostsController < ApplicationController
     @post.destroy
   end
 
+  def replay
+  end
+
+  def replay_create
+    @post = current_user.posts.build(post_params)
+    @post.save
+  end
+
   def repost
-    @post = Post.find(params[:post_id])
     if @post.reposts.exists?(user: current_user)
       Post.destroy_by(repost_id: @post.id, user_id: current_user.id)
     else
@@ -54,6 +52,10 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def set_post_id
+    @post = Post.find(params[:post_id])
   end
 
 end

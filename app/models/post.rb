@@ -1,16 +1,14 @@
 class Post < ApplicationRecord
+  #association
   belongs_to :user
-  has_rich_text :content
-  has_many :likes, as: :likeable, dependent: :destroy
-  
-  #for the reply to the post
   belongs_to :parent, class_name: 'Post', optional: true
-  has_many :replays, class_name: 'Post', foreign_key: 'parent_id', dependent: :destroy
-
-  #for the repost
   belongs_to :repost, class_name: 'Post', optional: true
+  has_many :likes, as: :likeable, dependent: :destroy
+  has_many :replays, class_name: 'Post', foreign_key: 'parent_id', dependent: :destroy
   has_many :reposts, class_name: 'Post', foreign_key: 'repost_id', dependent: :destroy
-
+  
+  has_rich_text :content
+  
   #post broadcasting to every user
   after_create do 
     unless self.repost_status
@@ -24,13 +22,13 @@ class Post < ApplicationRecord
   end
   
   after_destroy do 
-    broadcast_remove_to "all_posts", target: "post_#{self.id}"
-    if self.repost_status
-      broadcast_update_to "for_repost_count", target: "broadcast_repost_#{ self.repost_id }", partial: "posts/repost_count", locals: { post: Post.find(self.repost_id) }
-    end
+      broadcast_remove_to "all_posts"
+      if (self.repost_status && self)
+        broadcast_update_to "for_repost_count", target: "broadcast_repost_#{ self.repost_id }", partial: "posts/repost_count", locals: { post: Post.find(self.repost_id) }
+      end
   end
   
-  after_update do 
+  after_update do
     broadcast_update_to "all_posts", target: "post_#{self.id}", partial: "posts/post", locals: { post: self }
   end
   

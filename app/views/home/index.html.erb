@@ -1,0 +1,38 @@
+<!-- MAIN SECTION -->
+<div class="col-12 col-sm-10 col-md-9 col-lg-6  main_bar ">
+    <div class="row d-flex justify-content-between align-items-center ps-1">
+        <div class="col-1 pt-2">
+            <div><span class="fs-4 fw-bold">Home</span></div>
+        </div>
+        <div class="col-1 me-3">
+            <div><span class="fs-4"><i class="fa-solid fa-star"></i> </span></div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col pt-2 ">
+            <div class="row">
+                <div class="col-2">
+                    <% if @current_user.profile&.avatar.present? %>
+                        <%= image_tag @current_user.profile.avatar, style: 'height:70px;width:70px;margin-bottom:20px;border-radius:50px' %>
+                    <% else %>
+                        <%= image_tag "flawer.jpg", style: 'height:70px;width:70px;margin-bottom:20px;border-radius:50px' %>
+                    <% end %>
+                </div>
+                <div class="col-9 col-sm-10 ">
+                    <%= render 'posts/form' %>
+                </div>
+            </div>
+            <!-- POSTS -->
+            <%= turbo_stream_from "all_posts" %>
+            <div id= "post_records">
+                <%= render @posts %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
