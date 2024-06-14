@@ -1,0 +1,2 @@
+<%= turbo_stream.replace "user_#{@user.id}", partial: 'follow_button', user: @user %>
+<%= turbo_stream.update "follow_count_#{@user.id}", partial: 'follower_count', user: @user %>

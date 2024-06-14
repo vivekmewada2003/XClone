@@ -5,10 +5,11 @@
             <%= content_tag(:div, "", class:"pickerContainer" , data: {
                 emoji_picker_target: "pickerContainer"
             }) %>
-            <div class="field" >
-                <%= form.rich_text_area :content, placeholder: "What is Happning!!..", class: "border-0 bg form-control-lg overflow-hidden textarea", data: {
-                emoji_picker_target: "trixEditor"
+            <div class="field" data-controller="hastag" >
+                <%= form.rich_text_area :content, placeholder: "What is Happning!!..", id:"content-editor", class: "border-0 bg form-control-lg overflow-hidden textarea", data: {
+                emoji_picker_target: "trixEditor", hastag_target: 'editor'
                 } %>
+                <div id="hastag-suggestions" data-hastag-target="suggestions" style="display:none; position: fixed; background: white; border: 1px solid #ccc; z-index: 1000;border-radius: 6px"></div>
             </div>
 
             <div class="ps-3 d-flex text-info">
@@ -19,7 +20,7 @@
             <div class="row pb-2 justify-content-center">
                 <div class="col-9 text-info d-flex "> 
                     <div class="ps-3 text-end">
-                        <%= form.submit "Post", class: "btn btn-primary text-decoration-none fs-6 fw-bold text-white bg-info py-1 px-5 rounded-pil", style: "margin-left: 7rem", data: { action: 'click->closepopup#closeEvent'} %>
+                        <%= form.submit "Post", class: "btn btn-primary text-decoration-none fs-6 fw-bold text-white bg-info py-1 px-5 rounded-pil", style: "margin-left: 7rem", data: { action: 'click->closepopup#closeEvent' } %>
                     </div>
                 </div>
             </div>

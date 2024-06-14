@@ -7,3 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+
+Hashtag.create(name: '#user')
+Hashtag.create(name: '#rails')
+Hashtag.create(name: '#stimulus')
+Hashtag.create(name: '#javascript')
+Hashtag.create(name: '#rubyonrails')
+Hashtag.create(name: '#webdevelopment')

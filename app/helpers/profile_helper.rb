@@ -1,5 +1,5 @@
 module ProfileHelper
   def user_profile
-    @current_user.profile
+    @user.profile
   end
 end

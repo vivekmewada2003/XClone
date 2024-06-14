@@ -17,10 +17,10 @@
                 <div class="col-10 pt-2 ">
                     <div>
                         <p>
-                            <span class="fw-bold" style="font-size:20px;">
-                                <%= post.user.profile.present? ? post.user.profile.name.capitalize : post.user.email %>
+                            <span class="fw-bold post-name" style="font-size:20px;">
+                                <%= link_to((post.user.profile.present? ? post.user.profile.name.capitalize : post.user.email), profile_path(post.user), style: "color:black;text-decoration:none;") %>
                             </span>
-                            <span class="opacity-50"><%= post.created_at.to_date %></span>
+                            <span class="opacity-50"><%= post.created_at.to_date.strftime('%b %d, %Y') %></span>
                         </p>
                     </div>
                 </div>
@@ -46,10 +46,6 @@
                             <% else %>
                                 <li>
                                    <button type="button" class="btn border-disable">follow</button>
-                                </li>
-
-                                <li>
-                                    <button type="button" class="btn border-disable">unfollow</button>
                                 </li>
                             <% end %>
                         </ul>
@@ -112,7 +108,7 @@
                             <%= post.likes.count %>
                         </span>
                     </div> 
-                    <div class="col"><span><i class="fa-solid fa-share-nodes"></i></span></div>
+                    <div class="col"><span><i class="bi bi-bookmark" onclick="bookMark()" id="bookmark"></i></span></div>
                 </div>
             </div>
         </div>
@@ -141,3 +137,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    function bookMark() {
+        const obj = document.getElementById('bookmark');
+        obj.innerHTML = '<i class="bi bi-bookmark-fill"></i>';
+    }
+</script>

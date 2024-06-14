@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
   root "home#index"
-  
+  get 'home/suggest', to: 'home#suggest'
+
+
   resources :posts do
     resources :likes, only: [:create, :destroy]
     get 'replay', to: 'posts#replay', as: 'replay'
@@ -16,5 +18,6 @@ Rails.application.routes.draw do
   end
 
   resources :profile
+  post 'profile/follow', to: 'profile#follow'
+  post 'profile/unfollow', to: 'profile#unfollow'
 end
-  

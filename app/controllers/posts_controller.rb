@@ -51,11 +51,11 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
   end
 
   def set_post_id
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by(id: params[:post_id])
   end
 
 end

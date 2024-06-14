@@ -4,8 +4,10 @@
             <p><%= @post.content.to_plain_text.gsub(/\[.*?\]/, ' ')%></p>
              <span >Replying to <b style='color: #5087d8'><%= @post.user.email %></b>
 
-            <div class="field" >
-                <%= form.rich_text_area :content, value: '', placeholder: "Post your Reply  !!..", class: "border-0 bg form-control-lg overflow-hidden textarea" %>
+            <div class="field" data-controller= "hastag" >
+                <%= form.rich_text_area :content, value: '', placeholder: "Post your Reply  !!..", class: "border-0 bg form-control-lg overflow-hidden textarea", data: { hastag_target: 'editor' } %>
+                
+                <div id="hastag-suggestions" data-hastag-target="suggestions" style="display:none; position: fixed; background: white; border: 1px solid #ccc; z-index: 1000;border-radius: 6px"></div>
             </div>
 
             <%= form.hidden_field :parent_id, value: params[:post_id] %>
