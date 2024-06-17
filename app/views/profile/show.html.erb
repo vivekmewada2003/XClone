@@ -1,19 +1,19 @@
-<div class="w-50 p-3">
-    <div class="container-fluid " style="height: 48vh">
-        <div class="rounded" style= "height:20vh;background-color:#b6babe;"></div>
+<div class='main_bar w-50' style='margin-left: 320px;'>
+    <div class='container-fluid ' style='height: 48vh'>
+        <div class='rounded' style= 'height:20vh;background-color:#b6babe;'></div>
         <span>
             <% if user_profile&.avatar.present? %>
-                <%= image_tag user_profile.avatar, class: "profile-img" %>
+                <%= image_tag user_profile.avatar, class: 'profile-img' %>
             <% else %>
-                <%= image_tag "flawer.jpg", class:"profile-img" %>
+                <%= image_tag 'flawer.jpg', class:'profile-img' %>
             <% end %>
         </span>
         <% if @user == current_user %>
-            <button type="button" class="btn btn-primary float-end mt-4 bg-light border border-2 rounded-pill profile-edit-button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-                <%= link_to "edit profile", new_profile_path, data: { turbo_stream: true, action: 'click->closepopup#closeEvent' }, style: "color:black;text-decoration:none" %>
+            <button type='button' class='btn btn-primary float-end mt-4 bg-light border border-2 rounded-pill profile-edit-button' data-bs-toggle='modal' data-bs-target='#profileModal' data-bs-whatever='@mdo'>
+                <%= link_to 'edit profile', new_profile_path, data: { turbo_stream: true, action: 'click->closepopup#closeEvent' }, style: 'color:black;text-decoration:none' %>
             </button>
         <% else %>
-                <div class="float-end mt-4 bg-light border border-2 rounded-pill">
+                <div class='float-end mt-4 bg-light border border-2 rounded-pill'>
                     <%= render 'follow_button', user: @user %>
                 </div>
         <% end %>
@@ -25,45 +25,45 @@
                 <h5><%= @user.email %></h5>
                 <p>...<p>
             <% end %>
-            <p><i class="bi bi-calendar3"></i> Joined <%= @user.created_at.to_date.strftime('%B %Y') %></p>
+            <p><i class='bi bi-calendar3'></i> Joined <%= @user.created_at.to_date.strftime('%B %Y') %></p>
             <span><%= @user.followees.count %> following<span>
             <span style='margin-left:18px'><%= render 'profile/follower_count', user: @user %><span>
         </div>
     </div>
-    <div class="card-body pt-3">
-        <ul class="nav nav-tabs nav-tabs-bordered">
-            <li class="nav-item">
-                <button class="nav-link active me-5 item-hover" data-bs-toggle="tab" data-bs-target="#profile-post">Posts</button>
+    <div class='card-body pt-3'>
+        <ul class='nav nav-tabs nav-tabs-bordered'>
+            <li class='nav-item'>
+                <button class='nav-link active me-5 item-hover' data-bs-toggle='tab' data-bs-target='#profile-post'>Posts</button>
             </li>
 
-            <li class="nav-item">
-                <button class="nav-link me-5 item-hover" data-bs-toggle="tab" data-bs-target="#profile-replies">Replies</button>
+            <li class='nav-item'>
+                <button class='nav-link me-5 item-hover' data-bs-toggle='tab' data-bs-target='#profile-replies'>Replies</button>
             </li>
 
-            <li class="nav-item">
-                <button class="nav-link me-5 item-hover" data-bs-toggle="tab" data-bs-target="#profile-likes">Likes</button>
+            <li class='nav-item'>
+                <button class='nav-link me-5 item-hover' data-bs-toggle='tab' data-bs-target='#profile-likes'>Likes</button>
             </li>
 
-            <li class="nav-item">
-                <button class="nav-link me-5 item-hover" data-bs-toggle="tab" data-bs-target="#profile-media">Media</button>
+            <li class='nav-item'>
+                <button class='nav-link me-5 item-hover' data-bs-toggle='tab' data-bs-target='#profile-media'>Media</button>
             </li>
         </ul>
-        <div class="tab-content pt-2">
-            <div class="tab-pane fade show active profile-post" id="profile-post">
+        <div class='tab-content pt-2'>
+            <div class='tab-pane fade show active profile-post' id='profile-post'>
                 <%= render @posts %>
             </div>
 
-            <div class="tab-pane fade profile-replies pt-3" id="profile-replies">
+            <div class='tab-pane fade profile-replies pt-3' id='profile-replies'>
                 <%= render @replays %>
             </div>
 
-            <div class="tab-pane fade pt-3" id="profile-likes">
+            <div class='tab-pane fade pt-3' id='profile-likes'>
                 <%= render @likes %>
             </div>
 
-            <div class="tab-pane fade pt-3" id="profile-media">
+            <div class='tab-pane fade pt-3' id='profile-media'>
                 <% @posts.each do |post| %>
-                    <% if post.content.embeds.present? %> 
+                    <% if post.content.embeds.present? %>
                         <%= post.content.to_s.scan(/<action-text-attachment.*?<\/action-text-attachment>/m)[0].gsub(/<span.*?<\/span>/, '').html_safe %>
                     <% end %>
                 <% end %>
@@ -73,11 +73,11 @@
 <div>
 
 <%# Edit Profile Bootstrap Model %>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-controller="closepopup">
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true" data-controller="closepopup">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
+                <h5 class="modal-title" id="profileModalLabel">Update Profile</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

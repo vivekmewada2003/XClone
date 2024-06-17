@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+# post controller
 class PostsController < ApplicationController
-  before_action :set_post, only: [:destroy, :update, :edit]
-  before_action :set_post_id, only: [:replay, :repost]
+  before_action :set_post, only: %i[destroy update edit]
+  before_action :set_post_id, only: %i[replay repost]
 
   def new
     @post = current_user.posts.build
@@ -11,19 +14,17 @@ class PostsController < ApplicationController
     @post.save
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @post.update(post_params)
   end
 
-  def destroy 
+  def destroy
     @post.destroy
   end
 
-  def replay
-  end
+  def replay; end
 
   def replay_create
     @post = current_user.posts.build(post_params)
@@ -34,7 +35,7 @@ class PostsController < ApplicationController
     if @post.reposts.exists?(user: current_user)
       Post.destroy_by(repost_id: @post.id, user_id: current_user.id)
     else
-      @repost = current_user.posts.build(repost_id: @post.id, content: @post.content, repost_status: true )
+      @repost = current_user.posts.build(repost_id: @post.id, content: @post.content, repost_status: true)
       @repost.save
       @repost.repost_call
     end
@@ -57,5 +58,4 @@ class PostsController < ApplicationController
   def set_post_id
     @post = Post.find_by(id: params[:post_id])
   end
-
 end

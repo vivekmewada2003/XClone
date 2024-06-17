@@ -1,26 +1,26 @@
-<div class="col-12 col-sm-9" >
+<div class='col-12 col-sm-9' >
     <%= form_with model: @post, url: post_replay_create_path(@post), method: 'post' do |form| %>
-        <div class="col-9 col-sm-9 ">
+        <div class='col-9 col-sm-9 '>
             <p><%= @post.content.to_plain_text.gsub(/\[.*?\]/, ' ')%></p>
              <span >Replying to <b style='color: #5087d8'><%= @post.user.email %></b>
 
-            <div class="field" data-controller= "hastag" >
-                <%= form.rich_text_area :content, value: '', placeholder: "Post your Reply  !!..", class: "border-0 bg form-control-lg overflow-hidden textarea", data: { hastag_target: 'editor' } %>
-                
-                <div id="hastag-suggestions" data-hastag-target="suggestions" style="display:none; position: fixed; background: white; border: 1px solid #ccc; z-index: 1000;border-radius: 6px"></div>
+            <div class='field' data-controller= 'hastag' >
+                <%= form.rich_text_area :content, value: '', placeholder: 'Post your Reply  !!..', class: 'border-0 bg form-control-lg overflow-hidden textarea', data: { hastag_target: 'editor' } %>
+
+                <div id='hastag-suggestions' data-hastag-target='suggestions' style='display:none; position: fixed; background: white; border: 1px solid #ccc; z-index: 1000;border-radius: 6px'></div>
             </div>
 
             <%= form.hidden_field :parent_id, value: params[:post_id] %>
 
-            <div class="ps-3 d-flex text-info">
-                <p><span><i class="fa-solid fa-earth-americas "></i></span></p>
-                <p class="fw-bold text-nowrap">Everyone can reply</p>
+            <div class='ps-3 d-flex text-info'>
+                <p><span><i class='fa-solid fa-earth-americas '></i></span></p>
+                <p class='fw-bold text-nowrap'>Everyone can reply</p>
             </div>
 
-            <div class="row pb-2 justify-content-center">
-                <div class="col-9 text-info d-flex "> 
-                    <div class="ps-3 text-end">
-                        <%= form.submit "Post", class: "btn btn-primary text-decoration-none fs-6 fw-bold text-white bg-info py-1 px-5 rounded-pil", data: { action: 'click->closepopup#closeEvent' } %>
+            <div class='row pb-2 justify-content-center'>
+                <div class='col-9 text-info d-flex '>
+                    <div class='ps-3 text-end'>
+                        <%= form.submit 'Post', class: 'btn btn-primary text-decoration-none fs-6 fw-bold text-white bg-info py-1 px-5 rounded-pil', data: { action: 'click->closepopup#closeEvent' } %>
                     </div>
                 </div>
             </div>

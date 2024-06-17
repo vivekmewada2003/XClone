@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
+# profile controller
 class ProfileController < ApplicationController
-  before_action :set_user, only: [:show, :create, :follow, :unfollow]
+  before_action :set_user, only: %i[show create follow unfollow]
 
   def show
-      @user = current_user if (@user == current_user || @user.nil?)
-      @posts = @user.posts.order(created_at: :desc)
-      @likes = [];
-        current_user.likes.count.times do |like|
-          @likes.push(current_user.likes[like].likeable)
-        end
-      @replays = @user.posts.where.not(parent_id: nil);
+    @user = current_user if @user == current_user || @user.nil?
+    @posts = @user.posts.order(created_at: :desc)
+    @likes = []
+    current_user.likes.count.times do |like|
+      @likes.push(current_user.likes[like].likeable)
+    end
+    @replays = @user.posts.where.not(parent_id: nil)
   end
 
-  def new
-  end
+  def new; end
 
   def create
     current_user.create_profile!(profile_params)
@@ -31,7 +33,7 @@ class ProfileController < ApplicationController
   def profile_params
     params.require(:profile).permit(:name, :bio, :avatar)
   end
-  
+
   def set_user
     @user = User.find_by(id: params[:id])
   end

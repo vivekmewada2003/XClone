@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# likes controller
 class LikesController < ApplicationController
   before_action :set_post
 
@@ -6,9 +9,8 @@ class LikesController < ApplicationController
     if like
       like.destroy
     else
-        @post.likes.create(user: current_user)
+      @post.likes.create(user: current_user)
     end
-
   end
 
   private

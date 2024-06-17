@@ -1,43 +1,31 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>XClone</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <meta name="turbo-prefetch" content="false">
+        <title>Twitter</title>
+        <meta name='viewport' content='width=device-width,initial-scale=1'>
+        <meta name='turbo-prefetch' content='false'>
 
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
         <%= favicon_link_tag 'twitter.png' %>
 
-        <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+        <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
         <%= javascript_importmap_tags %>
-        <script src="https://kit.fontawesome.com/bf1c643ee2.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <script src='https://kit.fontawesome.com/bf1c643ee2.js' crossorigin='anonymous'></script>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
     </head>
 
     <body>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <p class='notice'><%= notice %></p>
+        <p class='alert'><%= alert %></p>
         <% if user_signed_in? %>
-            <div class="container-fluid container-md">
-                <div class="row ">
-                    <%= render partial: "layouts/left_sidebar" %>
+            <div class='container-fluid container-md'>
+                <div class='row'>
+                    <%= render partial: 'layouts/left_sidebar' %>
                     <%= yield %>
-                    <%= render partial: "layouts/right_sidebar" %>
+                    <%= render partial: 'layouts/right_sidebar' %>
                 </div>
             <div>
-            
-            <%# Bootstrap model for new post %>
-            <div class="modal fade" id="new_PostModal" tabindex="-1" aria-labelledby="new_PostModalLabel" aria-hidden="true" >
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary text-start" data-bs-dismiss="modal">Close</button>
-                        </div>
-                        <div class="modal-body" id= "connect"></div>
-                    </div>
-                </div>
-            </div>
         <% else %>
             <%= yield %>
         <% end %>

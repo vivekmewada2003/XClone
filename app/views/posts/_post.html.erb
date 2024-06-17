@@ -1,51 +1,50 @@
 <div id= "post_<%= post.id %>">
-    <div class="row mt-1 border d-flex " >
+    <div class='row mt-1 border d-flex ' >
         <div>
             <% if post.repost_status %>
-                <i class="bi bi-arrow-repeat"></i> You Reposted
+                <i class='bi bi-arrow-repeat'></i> You Reposted
             <% end %>
         </div>
-        <div class="col-3 mt-2">
+        <div class='col-3 mt-2'>
             <% if post.user.profile&.avatar.present? %>
-                <%= image_tag  post.user.profile.avatar, class:"img-style" %>
+                <%= image_tag  post.user.profile.avatar, class:'img-style' %>
             <% else %>
-                <%= image_tag "flawer.jpg", class:"img-style" %>
+                <%= image_tag 'flawer.jpg', class:'img-style' %>
             <% end %>
         </div>
-        <div class="col-9">
-            <div class="row d-flex justify-content-between align-items-center ps-1">
-                <div class="col-10 pt-2 ">
+        <div class='col-9'>
+            <div class='row d-flex justify-content-between align-items-center ps-1'>
+                <div class='col-10 pt-2 '>
                     <div>
                         <p>
-                            <span class="fw-bold post-name" style="font-size:20px;">
-                                <%= link_to((post.user.profile.present? ? post.user.profile.name.capitalize : post.user.email), profile_path(post.user), style: "color:black;text-decoration:none;") %>
+                            <span class='fw-bold post-name' style='font-size:20px;'>
+                                <%= link_to((post.user.profile.present? ? post.user.profile.name.capitalize : post.user.email), profile_path(post.user), style: 'color:black;text-decoration:none;') %>
                             </span>
-                            <span class="opacity-50"><%= post.created_at.to_date.strftime('%b %d, %Y') %></span>
+                            <span class='opacity-50'><%= post.created_at.to_date.strftime('%b %d, %Y') %></span>
                         </p>
                     </div>
                 </div>
-                <div class="col-1 me-2 ps-0">
-                    <div class="dropdown">
-                        <button class="btn border-disable btn-hover" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                            <i class="fa-solid fa-ellipsis outline-disable"></i>
+                <div class='col-1 me-2 ps-0'>
+                    <div class='dropdown'>
+                        <button class='btn border-disable btn-hover' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown'>
+                            <i class='fa-solid fa-ellipsis outline-disable'></i>
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
                             <% if post.user == @current_user %>
                                 <li>
-                                    <%= link_to post_path(post), class: "dropdown-item text-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <%= link_to post_path(post), class: 'dropdown-item text-danger', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do %>
+                                        <i class='fa fa-trash' aria-hidden='true'></i>
                                         <span>Delete</span>
                                     <% end %>
                                 </li>
-
                                 <li>
-                                    <button type="button" class="btn border-disable" data-bs-toggle="modal" data-bs-target="#editPostModal">
-                                        <%= link_to "Edit", edit_post_path(post), class: "dropdown-item", data: { turbo_stream: true } %>
+                                    <button type='button' class='btn border-disable' data-bs-toggle='modal' data-bs-target='#editPostModal'>
+                                        <%= link_to 'Edit', edit_post_path(post), class: 'dropdown-item', data: { turbo_stream: true } %>
                                     </button>
                                 </li>
                             <% else %>
                                 <li>
-                                   <button type="button" class="btn border-disable">follow</button>
+                                    <button type='button' class='btn border-disable'>not current user</button>
                                 </li>
                             <% end %>
                         </ul>
@@ -54,7 +53,7 @@
             </div>
             <% unless parent_emails(post).empty? %>
                 <div>
-                    Replying to 
+                    Replying to
                     <% parent_emails(post).each do |email| %>
                         <span style='color: #5087d8'><b><%= email %></b>
                             <% unless parent_emails(post).last == email%>
@@ -65,82 +64,74 @@
                 </div>
             <% end %>
             <br>
-            <div class="col">
+            <div class='col'>
                 <%= post.content %>
                 <br>
-                <div class="row pt-4">
-                    <div class="col">
-                        <button type="button" class=" btn border-disable replay-btn-style" data-bs-toggle="modal" data-bs-target="#replayModal">
-                            <%= link_to "", post_replay_path(post), data: { turbo_stream: true }, class: "fa-regular fa-comment-dots replay-button link-decoration" %>
+                <div class='row pt-4'>
+                    <div class='col'>
+                        <button type='button' class='btn border-disable replay-btn-style' data-bs-toggle='modal' data-bs-target='#replayModal'>
+                            <%= link_to '', post_replay_path(post), data: { turbo_stream: true }, class: 'fa-regular fa-comment-dots replay-button link-decoration' %>
                         </button>
                         <% if !(post.replays.empty?) %>
-                            <span style="font-family:Arial,sans-serif;font-size:15px;margin-left:-9px;" id="replayCount_<%= post.id %>" >
+                            <span style='font-family:Arial,sans-serif;font-size:15px;margin-left:-9px;' id="replayCount_<%= post.id %>" >
                                 <%= post.replays.count %>
                             </span>
                         <% else %>
-                            <span style="font-family:Arial,sans-serif;font-size:15px;margin-left:-9px;" id="replayCount_<%= post.id %>"><span>
+                            <span style='font-family:Arial,sans-serif;font-size:15px;margin-left:-9px;' id="replayCount_<%= post.id %>"><span>
                         <% end %>
                     </div>
 
-                    <div class="col">
-                        <div class="dropup-center dropup">
-                            <button class="btn border-disable" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding-top:0px;">
-                                <turbo-frame id="repost_button_<%= post.id %>" style= "display: inline-block">
+                    <div class='col'>
+                        <div class='dropup-center dropup'>
+                            <button class='btn border-disable' type='button' data-bs-toggle='dropdown' aria-expanded='false' style='padding-top:0px;'>
+                                <turbo-frame id="repost_button_<%= post.id %>" style= 'display: inline-block'>
                                     <%= render 'posts/repost_button', post: post %>
                                 </turbo-frame >
-                                <%= turbo_stream_from "for_repost_count" %>
+                                <%= turbo_stream_from 'for_repost_count' %>
                             </button>
-                            <span id="broadcast_repost_<%= post.id %>" style="margin-left:-9px;">
+                            <span id="broadcast_repost_<%= post.id %>" style='margin-left:-9px;'>
                                 <%= render 'posts/repost_count', post: post %>
                             </span>
-                            <ul class="dropdown-menu">
-                                <li><%= link_to "Repost", post_repost_path(post), data: { turbo_stream: true }, class: "link-decoration ps-3" %></li>
-                                <li><a class="dropdown-item" href="#">Quate</a></li>
+                            <ul class='dropdown-menu'>
+                                <li><%= link_to 'Repost', post_repost_path(post), data: { turbo_stream: true }, class: 'link-decoration ps-3' %></li>
+                                <li><a class='dropdown-item' href='#'>Quate</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col">
-                        <%= turbo_stream_from "all_likes" %>
-                        <turbo-frame id="post_<%= post.id %>_likes" style= "display: inline-block">
+                    <div class='col'>
+                        <%= turbo_stream_from 'all_likes' %>
+                        <turbo-frame id="post_<%= post.id %>_likes" style= 'display: inline-block'>
                             <%= render 'likes/like_button', post: post, data: { turbo_stream: true } %>
                         </turbo-frame >
-                        <span style="font-family:Arial,sans-serif;font-size:15px;" id="likeCount_<%= post.id %>" >
+                        <span style='font-family:Arial,sans-serif;font-size:15px;' id="likeCount_<%= post.id %>" >
                             <%= post.likes.count %>
                         </span>
-                    </div> 
-                    <div class="col"><span><i class="bi bi-bookmark" onclick="bookMark()" id="bookmark"></i></span></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true" data-controller="closepopup">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary text-start" data-bs-dismiss="modal">Close</button>
+<div class='modal fade' id='editPostModal' tabindex='-1' aria-labelledby='editPostModalLabel' aria-hidden='true' data-controller='closepopup'>
+    <div class='modal-dialog modal-dialog-centered'>
+        <div class='modal-content'>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-secondary text-start' data-bs-dismiss='modal'>Close</button>
             </div>
-                <div class="modal-body" id="connect_id">
+                <div class='modal-body' id='edit_post'>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="replayModal" tabindex="-1" aria-labelledby="replayModalLabel" aria-hidden="true" data-controller="closepopup">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary text-start" data-bs-dismiss="modal">Close</button>
+<div class='modal fade' id='replayModal' tabindex='-1' aria-labelledby='replayModalLabel' aria-hidden='true' data-controller='closepopup'>
+    <div class='modal-dialog modal-dialog-centered'>
+        <div class='modal-content'>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-secondary text-start' data-bs-dismiss='modal'>Close</button>
             </div>
-            <div class="modal-body" id="replay_id"></div>
+            <div class='modal-body' id='replay_id'></div>
         </div>
     </div>
 </div>
-
-<script>
-    function bookMark() {
-        const obj = document.getElementById('bookmark');
-        obj.innerHTML = '<i class="bi bi-bookmark-fill"></i>';
-    }
-</script>

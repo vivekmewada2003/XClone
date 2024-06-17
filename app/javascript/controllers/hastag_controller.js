@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["editor", "suggestions"];
 
   connect() {
-    // this.editorTarget.addEventListener('keydown', this.handleKeydown.bind(this));
     if (this.editorTarget.type == 'text'){
       this.editorTarget.addEventListener('input', this.checkForHashtag.bind(this));
     }else{
@@ -29,13 +28,6 @@ export default class extends Controller {
       this.hideSuggestions();
     }
   }
-
-  // handleKeydown(event) {
-  //   if (event.key === ' ') {
-  //     console.log("hello ji")
-  //     this.hideSuggestions();
-  //   }
-  // }
 
   fetchSuggestions(query) {
     fetch(`/home/suggest?query=${query}`)

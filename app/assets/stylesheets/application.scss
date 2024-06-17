@@ -17,6 +17,7 @@
 @import "actiontext";
 @import "post";
 @import "profiles";
+@import "signup";
 
 
 /*
@@ -47,14 +48,14 @@ div.right_side_bar {
 }
 
 .left_sidebar {
-  position: sticky;
+  position: fixed;
   top: 0px;
   height: fit-content;
 }
 
 .right-sidebar {
-  margin-left: -5.9rem;
-  margin-right: 7rem;
+  margin-left: -90px;
+  margin-right: 140px;
 }
 
 .left-sidebar-hover:hover {
