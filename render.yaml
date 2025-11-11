@@ -1,6 +1,6 @@
 databases:
   - name: vivek
-    databaseName: 
+    databaseName: vivek
     user: vivek
     plan: free
 
