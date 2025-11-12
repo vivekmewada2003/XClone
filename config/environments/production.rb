@@ -86,8 +86,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  Rails.application.routes.default_url_options[:host] = "x-clone.onrender.com"
-  config.hosts << "x-clone.onrender.com"
+  Rails.application.routes.default_url_options[:host] = "xclone-untz.onrender.com"
+  config.hosts << "xclone-untz.onrender.com"
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
@@ -97,5 +97,5 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  config.action_mailer.default_url_options = { host: "x-clone.onrender.com", protocol: "https" }
+  config.action_mailer.default_url_options = { host: "xclone-untz.onrender.com", protocol: "https" }
 end
